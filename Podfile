@@ -10,5 +10,7 @@ target 'ConcertsApp' do
   pod 'RxCocoa',  '4.5.0'
   pod 'RxAlamofire', '4.4.1'
   pod 'AlamofireImage'
-
+  pod 'Kingfisher'
+  pod "ViewAnimator"
+  
 end

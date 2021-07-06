@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.9.1)
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
+  - Kingfisher (6.3.0)
   - RxAlamofire (4.4.1):
     - RxAlamofire/Core (= 4.4.1)
   - RxAlamofire/Core (4.4.1):
@@ -10,28 +11,35 @@ PODS:
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxSwift (4.5.0)
+  - ViewAnimator (3.1.0)
 
 DEPENDENCIES:
   - AlamofireImage
+  - Kingfisher
   - RxAlamofire (= 4.4.1)
   - RxCocoa (= 4.5.0)
   - RxSwift (= 4.5.0)
+  - ViewAnimator
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - AlamofireImage
+    - Kingfisher
     - RxAlamofire
     - RxCocoa
     - RxSwift
+    - ViewAnimator
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
+  Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   RxAlamofire: ed65f451f5a9a59419b0b9e705043dc01410edd9
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
 
-PODFILE CHECKSUM: cbc4bd1251ff5b9ae6cba3155d8783988f13f121
+PODFILE CHECKSUM: 1f3845abad21412df7efe10d7d90ed8c8b63d737
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.10.1
