@@ -10,9 +10,7 @@ import UIKit
 import Kingfisher
 
 class ComicsTableViewCell: UITableViewCell {
-    
-    static let reuseIdentifier: String = "ComicsTableViewCell"
-    
+    // MARK: - IBOutlets:
     @IBOutlet private weak var labelComicName: UILabel! {
         didSet {
             labelComicName.font = UIFont.systemFont(ofSize: 13, weight: .regular)
@@ -23,6 +21,8 @@ class ComicsTableViewCell: UITableViewCell {
         }
     }
  
+    // MARK: - Properties:
+    static let reuseIdentifier: String = "ComicsTableViewCell"
     var comicsTableViewCellVM: ComicsTableViewCellVM? {
         didSet {
             updateUI()

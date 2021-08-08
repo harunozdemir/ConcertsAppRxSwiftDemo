@@ -41,13 +41,12 @@ extension Date {
     }
     
     var year: Int {
-        return self.components().year ?? 2018
+        return self.components().year ?? 2021
     }
     
     func dateFormat(with type: DateFormatterType) -> Date {
         let dateFormatter = self.dateFormatter(with: type)
         let dateString = dateFormatter.string(from: self)
-        
         return dateFormatter.date(from: dateString) ?? self
     }
     
@@ -61,7 +60,6 @@ extension Date {
     func date(byAdding year: Int, month: Int, day: Int) -> Date {
         let calendar = Calendar(identifier: .gregorian)
         let dateComponents = DateComponents(year: year, month: month, day: day)
-        
         return calendar.date(byAdding: dateComponents, to: self) ?? self
     }
     
@@ -92,7 +90,6 @@ extension Date {
     func components() -> DateComponents {
         let calendar = Calendar(identifier: .gregorian)
         let components = calendar.dateComponents([.minute, .hour, .day, .month, .year], from: self)
-        
         return components
     }
     
@@ -112,10 +109,8 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = type.rawValue
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        
         return dateFormatter
     }
-    
     
     func convertDateFormat(with formatterTo: DateFormatterType, formatterFrom: DateFormatterType, dateString: String) -> String {
         let dateFormatterFrom = DateFormatter()
@@ -127,14 +122,7 @@ extension Date {
         dateFormatterTo.timeZone = TimeZone(identifier: "GMT+3")
         
         let dateStr = dateFormatterTo.string(from: dateFormatterFrom.date(from: dateString) ?? self)
-        
         return dateStr
-        
-        //    var dateFormatter = self.dateFormatter(with: formatterTo)
-        //    let date = dateFormatter.date(from: dateString)
-        //    dateFormatter = self.dateFormatter(with: formatterFrom)
-        //    let timeStamp = dateFormatter.string(from: date!)
-        //    return timeStamp
     }
     
     func stringToDate(_ type: DateFormatterType, stringDate: String) -> Date {
@@ -142,13 +130,11 @@ extension Date {
             return Date()
         }
         let formatter = dateFormatter(with: type)
-        
         return formatter.date(from: stringDate) ?? Date()
     }
     
     func dateToString(_ type: DateFormatterType) -> String {
         let dateFormatter = self.dateFormatter(with: type)
-        
         return dateFormatter.string(from: self)
     }
     
@@ -158,14 +144,11 @@ extension Date {
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        
         return dateFormatter.string(from: self)
     }
     
     func isDateInToday(date:Date) -> Bool {
         let calendar = Calendar.current
         return calendar.isDateInToday(date)
-        
     }
-    
 }

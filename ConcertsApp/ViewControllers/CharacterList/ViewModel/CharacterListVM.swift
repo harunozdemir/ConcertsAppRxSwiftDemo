@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 final class CharacterListVM: BaseViewModel {
+    // MARK: - Properties:
     private let service: APIServiceType = APIService()
     private var characters: [Character]
     
@@ -24,7 +25,6 @@ final class CharacterListVM: BaseViewModel {
                 self.characters = characters
             })
     }
-    
     
     func getCharactersTableViewCellVM(at index: Int) -> CharactersTableViewCellVM {
         guard index < self.characters.count else { return CharactersTableViewCellVM() }
@@ -42,9 +42,6 @@ final class CharacterListVM: BaseViewModel {
     }
     
     func getCharacter(at index: Int) -> Character? {
-        guard index < characters.count else { return nil}
-        return characters[index]
+        return index < characters.count ? characters[index] : nil
     }
 }
-
-

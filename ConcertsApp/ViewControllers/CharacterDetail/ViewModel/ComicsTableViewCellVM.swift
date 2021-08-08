@@ -9,6 +9,7 @@
 import Foundation
 
 class ComicsTableViewCellVM: BaseViewModel {
+    // MARK: - Properties:
     private(set) var comicName: String = String()
     
     init(comicName: String = String()) {

@@ -8,12 +8,14 @@
 
 import Foundation
 import RxSwift
+
 final class CharacterDetailVM: BaseViewModel {
+    // MARK: - Properties:
     private let service: APIServiceType = APIService()
+    private let modifiedSince = "2015.01.01"
+    private var comics: [Comics]?
     var id: Int
     var selectedCharacter: Character?
-    private var comics: [Comics]?
-    private let modifiedSince = "2015.01.01"
     
     init(id: Int = -1) {
         self.id = id
@@ -65,13 +67,10 @@ final class CharacterDetailVM: BaseViewModel {
     }
     
     func getComicsItem(at index: Int) -> Comics {
-        guard index < characterComics.count else { return Comics() }
-        return characterComics[index]
+        return index < characterComics.count ? characterComics[index] : Comics()
     }
     
     func getComicsTableViewCellVM(at index: Int) -> ComicsTableViewCellVM {
         return ComicsTableViewCellVM(comicName: getComicsItem(at: index).title)
     }
 }
-
-

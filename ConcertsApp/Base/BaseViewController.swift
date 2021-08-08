@@ -6,7 +6,6 @@
 //  Copyright © 2019 harun. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import RxSwift
 

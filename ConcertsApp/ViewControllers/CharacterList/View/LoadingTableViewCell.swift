@@ -9,9 +9,9 @@
 import UIKit
 
 class LoadingTableViewCell: UITableViewCell {
+    // MARK: - IBOutlets:
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    // MARK: - Properties:
     static let reuseIdentifier: String = "LoadingTableViewCell"
-    
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! 
-    
 }

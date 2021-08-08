@@ -12,7 +12,10 @@ import RxAlamofire
 import Alamofire
 
 extension Reactive where Base: SessionManager {
-    func encodeMultipartUpload(to url: URLConvertible, method: HTTPMethod = .post, headers: HTTPHeaders = [:], data: @escaping (MultipartFormData) -> Void) -> Observable<UploadRequest> {
+    func encodeMultipartUpload(to url: URLConvertible,
+                               method: HTTPMethod = .post,
+                               headers: HTTPHeaders = [:],
+                               data: @escaping (MultipartFormData) -> Void) -> Observable<UploadRequest> {
         return Observable.create { observer in
             self.base.upload(multipartFormData: data,
                              to: url,
@@ -22,7 +25,7 @@ extension Reactive where Base: SessionManager {
                                 switch result {
                                 case .failure(let error):
                                     observer.onError(error)
-                                case .success(let request, let response, _):
+                                case .success(let request, _, _):
                                     observer.onNext(request)
                                     observer.onCompleted()
                                 }
@@ -52,7 +55,7 @@ enum Endpoint {
 }
 
 final class APIService: APIServiceType {
-    
+    // MARK: - Properties:
     private let manager = HTTPManager.shared
     private let encoding = JSONEncoding.default
     private var defaultRequestParameter: [String: AnyObject] = [:]
@@ -91,37 +94,33 @@ final class APIService: APIServiceType {
     }
     
     private func request<T: Codable>(methodType: HTTPMethod, url: URL, parameters: [String: AnyObject]? = nil) -> Single<T?> {
-        
         var requestUrl = url
         if methodType == .get {
             var queryString = parameters?.queryString ?? ""
-            queryString = queryString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)!
+            queryString = queryString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed) ?? ""
             if !queryString.isEmpty {
                 queryString.removeLast()
                 requestUrl = URL(string: "\(url.absoluteString)?\(queryString)")!
             }
-
         }
-        return manager.rx.responseString(methodType, requestUrl, parameters: methodType == .get ? nil : parameters, encoding: encoding)
+        return manager.rx.responseString(methodType, requestUrl,
+                                         parameters: methodType == .get ? nil : parameters,
+                                         encoding: encoding)
             .observeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS(qosClass: DispatchQoS.QoSClass.background, relativePriority: 1)))
             .asSingle()
             .catchError { error -> Single<(HTTPURLResponse, String)> in
-                
                 return Single.error(error)
             }
             .flatMap { json -> Single<T?> in
                 let statusCode = json.0.statusCode
                 let jsonString = json.1
-                
                 guard let data = jsonString.data(using: .utf8) else { return Single.just(nil) }
                 
-//                let _ = try! JSONDecoder().decode(T.self, from: data)
+                // let _ = try! JSONDecoder().decode(T.self, from: data)
                 if let response = try? JSONDecoder().decode(T.self, from: data) {
                     return Single.just(response)
                 }
-                
                 return Single.error(APIError(message: ""))
-                
             }
     }
     
@@ -130,7 +129,6 @@ final class APIService: APIServiceType {
             let configuration = URLSessionConfiguration.default
             configuration.timeoutIntervalForRequest = 140
             configuration.timeoutIntervalForResource = 140
-            
             let manager = HTTPManager(configuration: configuration)
             return manager
         }()
@@ -141,7 +139,6 @@ final class APIService: APIServiceType {
         
         init(message: String) {
             self.message = message
-            
         }
     }
 }

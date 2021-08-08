@@ -10,9 +10,7 @@ import UIKit
 import Kingfisher
 
 class CharactersTableViewCell: UITableViewCell {
-    
-    static let reuseIdentifier: String = "CharactersTableViewCell"
-    
+    // MARK: - IBOutlets:
     @IBOutlet private weak var labelCharacterName: UILabel! {
         didSet {
             labelCharacterName.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
@@ -29,6 +27,8 @@ class CharactersTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Properties:
+    static let reuseIdentifier: String = "CharactersTableViewCell"
     var charactersTableViewCellVM: CharactersTableViewCellVM? {
         didSet {
             updateUI()

@@ -1,0 +1,6 @@
+framework module Pods_ConcertsAppTests {
+  umbrella header "Pods-ConcertsAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

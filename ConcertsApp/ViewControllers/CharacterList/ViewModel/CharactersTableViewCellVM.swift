@@ -9,6 +9,7 @@
 import Foundation
 
 class CharactersTableViewCellVM: BaseViewModel {
+    // MARK: - Properties:
     private var characterName: String = String()
     private var thumbnail: Thumbnail?
     

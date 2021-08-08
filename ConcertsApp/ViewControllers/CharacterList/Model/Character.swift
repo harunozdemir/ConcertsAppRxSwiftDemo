@@ -18,7 +18,7 @@ class Character: Codable {
     var resourceURI: String = String()
     var stories: Stories = Stories()
     var urls: [URLElement] = []
-
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(Int.self, forKey: .id) ?? -1
@@ -29,7 +29,7 @@ class Character: Codable {
         self.resourceURI = try container.decodeIfPresent(String.self, forKey: .resourceURI) ?? String()
         self.urls = try container.decodeIfPresent([URLElement].self, forKey: .urls) ?? []
     }
-
+    
     init() {
         
     }

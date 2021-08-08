@@ -7,12 +7,11 @@
 //
 
 import XCTest
-@testable import ConcertsApp
 import RxSwift
+@testable import ConcertsApp
 
 class CharacterListVMTest: XCTestCase {
-
-    // MARK: - Private Properties
+    // MARK: - Properties
     private var sut: CharacterListVM! = CharacterListVM()
     private var characters: [Character]?
     

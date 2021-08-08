@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 class CharacterDetailVC: BaseViewController {
-    
+    // MARK: - IBOutlets:
     @IBOutlet weak var imageViewCharacter: UIImageView! {
         didSet {
             imageViewCharacter.contentMode = .scaleAspectFit
@@ -47,25 +47,22 @@ class CharacterDetailVC: BaseViewController {
         }
     }
     
+    // MARK: - Properties:
     var viewModel: CharacterDetailVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         getCharacter()
-        
         getComics()
-        
     }
     
     private func getCharacter() {
         viewModel?.getCharacter()
             .observeOn(MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] response in
-                guard let self = self else { return }
-                self.updateUI()
+                self?.updateUI()
             }, onError: { [weak self] error in
-                guard let self = self else { return }
+                self?.showAlertDefault(message: error.localizedDescription)
             }).disposed(by: disposeBag)
     }
     
@@ -73,10 +70,9 @@ class CharacterDetailVC: BaseViewController {
         viewModel?.getComics()
             .observeOn(MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] response in
-                guard let self = self else { return }
-                self.tableViewComics.reloadData()
+                self?.tableViewComics.reloadData()
             }, onError: { [weak self] error in
-                guard let self = self else { return }
+                self?.showAlertDefault(message: error.localizedDescription)
             }).disposed(by: disposeBag)
     }
     
@@ -87,7 +83,7 @@ class CharacterDetailVC: BaseViewController {
     }
 }
 
-// MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension CharacterDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.comicsCount ?? 0

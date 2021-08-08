@@ -10,15 +10,15 @@ import Foundation
 
 // MARK: - CharactersResponse
 struct CharactersResponse: Codable {
-  let data: DataObject
-  
-  enum CodingKeys: String, CodingKey {
-    case data = "data"
-  }
-  
-  init(data: DataObject) {
-    self.data = data
-  }
+    let data: DataObject
+    
+    enum CodingKeys: String, CodingKey {
+        case data = "data"
+    }
+    
+    init(data: DataObject) {
+        self.data = data
+    }
 }
 
 // MARK: - DataObject
@@ -26,9 +26,9 @@ struct DataObject: Codable {
     let characters: [Character]?
     
     enum CodingKeys: String, CodingKey {
-      case characters = "results"
+        case characters = "results"
     }
-
+    
     init(characters: [Character]?) {
         self.characters = characters
     }

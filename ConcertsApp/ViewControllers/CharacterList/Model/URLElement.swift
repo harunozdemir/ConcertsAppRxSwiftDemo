@@ -29,4 +29,3 @@ enum URLType: String, Codable {
     case detail = "detail"
     case wiki = "wiki"
 }
-

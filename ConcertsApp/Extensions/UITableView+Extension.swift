@@ -13,7 +13,6 @@ extension UITableView {
         guard let lastIndexPath = indexPathsForVisibleRows?.last else {
             return false
         }
-        
         return lastIndexPath == indexPath
     }
 }

@@ -7,12 +7,11 @@
 //
 
 import XCTest
-@testable import ConcertsApp
 import RxSwift
+@testable import ConcertsApp
 
 class CharacterDetailVMTest: XCTestCase {
-
-    // MARK: - Private Properties
+    // MARK: - Properties
     private var sut: CharacterDetailVM! = CharacterDetailVM()
     private var character: Character?
     private var comics: [Comics]?
@@ -80,4 +79,3 @@ class CharacterDetailVMTest: XCTestCase {
         waitForExpectations(timeout: timeout, handler: nil)
     }
 }
-
