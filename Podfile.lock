@@ -14,8 +14,6 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.2)
-  - RxTest (5.1.2):
-    - RxSwift (~> 5)
   - ViewAnimator (3.1.0)
 
 DEPENDENCIES:
@@ -24,7 +22,6 @@ DEPENDENCIES:
   - RxAlamofire (~> 5)
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
-  - RxTest (~> 5)
   - ViewAnimator
 
 SPEC REPOS:
@@ -36,7 +33,6 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
-    - RxTest
     - ViewAnimator
 
 SPEC CHECKSUMS:
@@ -47,9 +43,8 @@ SPEC CHECKSUMS:
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
-  RxTest: 274549b747dca56f47c52c8991ec5cf797ecfe40
   ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
 
-PODFILE CHECKSUM: 0c9e4cf56551f764f6aa8425b38c2d6940748f3a
+PODFILE CHECKSUM: f84ccf72668694bc70c941eda20ac1488ada13a5
 
 COCOAPODS: 1.10.1

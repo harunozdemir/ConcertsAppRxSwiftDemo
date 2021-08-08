@@ -11,7 +11,7 @@ def rx_pod
   pod 'RxAlamofire', '~> 5'
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
-  pod 'RxTest', '~> 5'
+#  pod 'RxTest', '~> 5'
 end
 
 def app_pod

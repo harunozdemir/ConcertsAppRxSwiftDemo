@@ -8,7 +8,6 @@
 
 import XCTest
 import RxSwift
-import RxTest
 @testable import ConcertsApp
 
 class CharacterListVMTest: BaseXCTestCase {
@@ -16,7 +15,6 @@ class CharacterListVMTest: BaseXCTestCase {
     private var sut: CharacterListVM! = CharacterListVM()
     private var service: APIServiceMock! = APIServiceMock()
     private var characters: [Character]?
-    private let testScheduler = TestScheduler(initialClock: 0)
     
     // MARK: - Lifecycle
     override func setUp() {
@@ -53,7 +51,6 @@ class CharacterListVMTest: BaseXCTestCase {
         let completedExpectation = expectation(description: "GetAllCharacters")
         service.getCharacters(id: nil, limit: 10)
             .observeOn(MainScheduler.instance)
-            .subscribeOn(testScheduler)
             .subscribe(onSuccess: { [weak self] response in
                 guard let self = self else { return }
                 self.sut.characters = response?.data.characters ?? []
@@ -61,7 +58,6 @@ class CharacterListVMTest: BaseXCTestCase {
             }, onError: { _ in
                 completedExpectation.fulfill()
             }).disposed(by: disposeBag ?? DisposeBag())
-        testScheduler.start()
         waitForExpectations(timeout: timeout, handler: nil)
     }
 }

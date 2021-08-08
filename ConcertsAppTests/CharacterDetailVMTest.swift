@@ -8,7 +8,6 @@
 
 import XCTest
 import RxSwift
-import RxTest
 import Alamofire
 @testable import ConcertsApp
 
@@ -17,7 +16,6 @@ class CharacterDetailVMTest: BaseXCTestCase {
     private var sut: CharacterDetailVM! = CharacterDetailVM()
     private var service: APIServiceMock! = APIServiceMock()
     private var comics: [Comics]?
-    private let testScheduler = TestScheduler(initialClock: 0)
     private let testCharacterId = 1011334
     
     // MARK: - Lifecycle
@@ -59,7 +57,6 @@ class CharacterDetailVMTest: BaseXCTestCase {
         let completedExpectation = expectation(description: "GetCharacterDetail")
         service.getCharacters(id: testCharacterId, limit: nil)
             .observeOn(MainScheduler.instance)
-            .subscribeOn(testScheduler)
             .subscribe(onSuccess: { [weak self] response in
                 guard let self = self,
                       let character = response?.data.characters?.first else { return }
@@ -68,7 +65,6 @@ class CharacterDetailVMTest: BaseXCTestCase {
             }, onError: { _ in
                 completedExpectation.fulfill()
             }).disposed(by: disposeBag ?? DisposeBag())
-        testScheduler.start()
         waitForExpectations(timeout: timeout, handler: nil)
     }
 }
