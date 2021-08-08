@@ -11,14 +11,15 @@ import RxSwift
 
 final class CharacterDetailVM: BaseViewModel {
     // MARK: - Properties:
-    private let service: APIServiceType = APIService()
+    private var service: APIServiceType = APIService()
     private let modifiedSince = "2015.01.01"
     private var comics: [Comics]?
     var id: Int
     var selectedCharacter: Character?
     
-    init(id: Int = -1) {
+    init(id: Int = -1, service: APIServiceType = APIService()) {
         self.id = id
+        self.service = service
     }
     
     func getCharacter() -> Single<CharactersResponse?> {
@@ -41,7 +42,7 @@ final class CharacterDetailVM: BaseViewModel {
             })
     }
     
-    // MARK: - Computed Properties
+    // MARK: - Computed Properties:
     var character: Character {
         selectedCharacter ?? Character()
     }

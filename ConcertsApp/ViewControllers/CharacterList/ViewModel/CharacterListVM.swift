@@ -11,11 +11,12 @@ import RxSwift
 
 final class CharacterListVM: BaseViewModel {
     // MARK: - Properties:
-    private let service: APIServiceType = APIService()
-    private var characters: [Character]
+    private var service: APIServiceType = APIService()
+    var characters: [Character]
     
-    init(characters: [Character] = []) {
+    init(characters: [Character] = [], service: APIServiceType = APIService()) {
         self.characters = characters
+        self.service = service
     }
     
     func getCharacters(limit: Int) -> Single<CharactersResponse?> {
@@ -32,7 +33,7 @@ final class CharacterListVM: BaseViewModel {
         return CharactersTableViewCellVM(characterName: character.name, thumbnail: character.thumbnail)
     }
     
-    // MARK: - Computed Properties
+    // MARK: - Computed Properties:
     var characterCount: Int {
         characters.count
     }

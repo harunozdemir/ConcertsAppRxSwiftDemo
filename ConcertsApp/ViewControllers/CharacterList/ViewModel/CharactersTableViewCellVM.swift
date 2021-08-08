@@ -18,7 +18,7 @@ class CharactersTableViewCellVM: BaseViewModel {
         self.thumbnail = thumbnail
     }
     
-    // MARK: - Computed Properties
+    // MARK: - Computed Properties:
     var name: String {
         characterName
     }

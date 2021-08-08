@@ -8,26 +8,33 @@
 
 import XCTest
 import RxSwift
+import RxTest
+import Alamofire
 @testable import ConcertsApp
 
 class CharacterDetailVMTest: BaseXCTestCase {
     // MARK: - Properties
     private var sut: CharacterDetailVM! = CharacterDetailVM()
+    private var service: APIServiceMock! = APIServiceMock()
     private var comics: [Comics]?
+    private let testScheduler = TestScheduler(initialClock: 0)
+    private let testCharacterId = 1011334
     
     // MARK: - Lifecycle
     override func setUp() {
         super.setUp()
-        sut = CharacterDetailVM()
+        sut = CharacterDetailVM(service: service)
     }
     
     override func tearDown() {
         sut = nil
+        service = nil
         super.tearDown()
     }
     
+    // MARK: - Get Detail Character success case
     func test_detailCharacter_success() {
-        sut.id = 1011334
+        service.shouldFetchSuccess = true
         fetchCharacterDetail()
         XCTAssertFalse(sut.characterName.isEmpty)
         XCTAssertFalse(sut.imageUrl.isEmpty)
@@ -39,41 +46,29 @@ class CharacterDetailVMTest: BaseXCTestCase {
         }
     }
     
-    func test_getCharacterComics_success() {
-        sut.id = 1011334
-        fetchComics()
-        XCTAssertFalse(sut.characterComics.isEmpty)
-        XCTAssertTrue(sut.comicsCount > 0)
+    // MARK: - Get Detail Character failure case
+    func test_detailCharacter_failure() {
+        service.shouldFetchSuccess = false
+        fetchCharacterDetail()
+        XCTAssertTrue(sut.characterName.isEmpty)
+        XCTAssertNil(sut.description)
+        XCTAssert(sut.comicsCount == 0)
     }
     
     private func fetchCharacterDetail() {
         let completedExpectation = expectation(description: "GetCharacterDetail")
-        sut.getCharacter()
+        service.getCharacters(id: testCharacterId, limit: nil)
             .observeOn(MainScheduler.instance)
+            .subscribeOn(testScheduler)
             .subscribe(onSuccess: { [weak self] response in
                 guard let self = self,
                       let character = response?.data.characters?.first else { return }
                 self.sut.selectedCharacter = character
                 completedExpectation.fulfill()
-            }, onError: { [weak self] error in
+            }, onError: { _ in
                 completedExpectation.fulfill()
             }).disposed(by: disposeBag ?? DisposeBag())
-        waitForExpectations(timeout: timeout, handler: nil)
-    }
-    
-    private func fetchComics() {
-        let completedExpectation = expectation(description: "GetComics")
-        sut.getComics()
-            .observeOn(MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] response in
-                guard let self = self,
-                      let comics = response?.data.comics
-                else { return }
-                self.comics = comics
-                completedExpectation.fulfill()
-            }, onError: { [weak self] error in
-                completedExpectation.fulfill()
-            }).disposed(by: disposeBag ?? DisposeBag())
+        testScheduler.start()
         waitForExpectations(timeout: timeout, handler: nil)
     }
 }

@@ -54,7 +54,7 @@ enum Endpoint {
     }
 }
 
-final class APIService: APIServiceType {
+class APIService: APIServiceType {
     // MARK: - Properties:
     private let manager = HTTPManager.shared
     private let encoding = JSONEncoding.default
@@ -93,7 +93,7 @@ final class APIService: APIServiceType {
         return request(methodType: .get, url: Endpoint.UserBundle.characters.urlDetail(with: "\(characterId)/comics"), parameters: parameters)
     }
     
-    private func request<T: Codable>(methodType: HTTPMethod, url: URL, parameters: [String: AnyObject]? = nil) -> Single<T?> {
+    func request<T: Codable>(methodType: HTTPMethod, url: URL, parameters: [String: AnyObject]? = nil) -> Single<T?> {
         var requestUrl = url
         if methodType == .get {
             var queryString = parameters?.queryString ?? ""
@@ -112,7 +112,7 @@ final class APIService: APIServiceType {
                 return Single.error(error)
             }
             .flatMap { json -> Single<T?> in
-                let statusCode = json.0.statusCode
+                _ = json.0.statusCode
                 let jsonString = json.1
                 guard let data = jsonString.data(using: .utf8) else { return Single.just(nil) }
                 
@@ -139,6 +139,18 @@ final class APIService: APIServiceType {
         
         init(message: String) {
             self.message = message
+        }
+    }
+}
+
+final class APIServiceMock: APIService {
+    var shouldFetchSuccess: Bool = true
+    
+    override func request<T>(methodType: HTTPMethod, url: URL, parameters: [String : AnyObject]? = nil) -> Single<T?> where T : Decodable, T : Encodable {
+        if shouldFetchSuccess {
+            return super.request(methodType: methodType, url: url, parameters: parameters)
+        } else {
+            return Single.error(APIError(message: ""))
         }
     }
 }
