@@ -10,7 +10,7 @@ import XCTest
 import RxSwift
 @testable import ConcertsApp
 
-class CharacterListVMTest: XCTestCase {
+class CharacterListVMTest: BaseXCTestCase {
     // MARK: - Properties
     private var sut: CharacterListVM! = CharacterListVM()
     private var characters: [Character]?
@@ -46,7 +46,7 @@ class CharacterListVMTest: XCTestCase {
                 completedExpectation.fulfill()
             }, onError: { [weak self] error in
                 completedExpectation.fulfill()
-            }).disposed(by: DisposeBag())
+            }).disposed(by: disposeBag ?? DisposeBag())
         waitForExpectations(timeout: timeout, handler: nil)
     }
 }

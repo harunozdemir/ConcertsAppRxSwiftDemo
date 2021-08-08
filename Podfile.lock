@@ -3,22 +3,28 @@ PODS:
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
   - Kingfisher (6.3.0)
-  - RxAlamofire (4.4.1):
-    - RxAlamofire/Core (= 4.4.1)
-  - RxAlamofire/Core (4.4.1):
+  - RxAlamofire (5.1.0):
+    - RxAlamofire/Core (= 5.1.0)
+  - RxAlamofire/Core (5.1.0):
     - Alamofire (~> 4.8)
-    - RxSwift (~> 4.5)
-  - RxCocoa (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxSwift (4.5.0)
+    - RxSwift (~> 5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.2)
+  - RxTest (5.1.2):
+    - RxSwift (~> 5)
   - ViewAnimator (3.1.0)
 
 DEPENDENCIES:
   - AlamofireImage
   - Kingfisher
-  - RxAlamofire (= 4.4.1)
-  - RxCocoa (= 4.5.0)
-  - RxSwift (= 4.5.0)
+  - RxAlamofire (~> 5)
+  - RxCocoa (~> 5)
+  - RxSwift (~> 5)
+  - RxTest (~> 5)
   - ViewAnimator
 
 SPEC REPOS:
@@ -28,18 +34,22 @@ SPEC REPOS:
     - Kingfisher
     - RxAlamofire
     - RxCocoa
+    - RxRelay
     - RxSwift
+    - RxTest
     - ViewAnimator
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
-  RxAlamofire: ed65f451f5a9a59419b0b9e705043dc01410edd9
-  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
-  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  RxAlamofire: a2d7621de4c23a0c6e7b476b504acc32838ee341
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
+  RxTest: 274549b747dca56f47c52c8991ec5cf797ecfe40
   ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
 
-PODFILE CHECKSUM: 1f3845abad21412df7efe10d7d90ed8c8b63d737
+PODFILE CHECKSUM: 0c9e4cf56551f764f6aa8425b38c2d6940748f3a
 
 COCOAPODS: 1.10.1

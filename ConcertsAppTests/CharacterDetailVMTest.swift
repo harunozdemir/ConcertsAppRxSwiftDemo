@@ -10,7 +10,7 @@ import XCTest
 import RxSwift
 @testable import ConcertsApp
 
-class CharacterDetailVMTest: XCTestCase {
+class CharacterDetailVMTest: BaseXCTestCase {
     // MARK: - Properties
     private var sut: CharacterDetailVM! = CharacterDetailVM()
     private var character: Character?
@@ -59,7 +59,7 @@ class CharacterDetailVMTest: XCTestCase {
                 completedExpectation.fulfill()
             }, onError: { [weak self] error in
                 completedExpectation.fulfill()
-            }).disposed(by: DisposeBag())
+            }).disposed(by: disposeBag ?? DisposeBag())
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -75,7 +75,7 @@ class CharacterDetailVMTest: XCTestCase {
                 completedExpectation.fulfill()
             }, onError: { [weak self] error in
                 completedExpectation.fulfill()
-            }).disposed(by: DisposeBag())
+            }).disposed(by: disposeBag ?? DisposeBag())
         waitForExpectations(timeout: timeout, handler: nil)
     }
 }
