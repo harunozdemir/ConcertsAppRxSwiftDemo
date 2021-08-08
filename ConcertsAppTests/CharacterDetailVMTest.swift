@@ -13,7 +13,6 @@ import RxSwift
 class CharacterDetailVMTest: BaseXCTestCase {
     // MARK: - Properties
     private var sut: CharacterDetailVM! = CharacterDetailVM()
-    private var character: Character?
     private var comics: [Comics]?
     
     // MARK: - Lifecycle
@@ -32,7 +31,7 @@ class CharacterDetailVMTest: BaseXCTestCase {
         fetchCharacterDetail()
         XCTAssertFalse(sut.characterName.isEmpty)
         XCTAssertFalse(sut.imageUrl.isEmpty)
-        XCTAssertFalse(sut.description.isEmpty)
+        XCTAssertNotNil(sut.description)
         XCTAssertFalse(sut.comicsCount > 0)
         for i in 0 ..< sut.comicsCount {
             let cellVM = sut.getComicsTableViewCellVM(at: i)
@@ -42,7 +41,7 @@ class CharacterDetailVMTest: BaseXCTestCase {
     
     func test_getCharacterComics_success() {
         sut.id = 1011334
-        fetchCharacterDetail()
+        fetchComics()
         XCTAssertFalse(sut.characterComics.isEmpty)
         XCTAssertTrue(sut.comicsCount > 0)
     }
@@ -54,7 +53,6 @@ class CharacterDetailVMTest: BaseXCTestCase {
             .subscribe(onSuccess: { [weak self] response in
                 guard let self = self,
                       let character = response?.data.characters?.first else { return }
-                self.character = character
                 self.sut.selectedCharacter = character
                 completedExpectation.fulfill()
             }, onError: { [weak self] error in

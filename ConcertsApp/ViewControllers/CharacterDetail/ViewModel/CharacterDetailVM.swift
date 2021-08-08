@@ -54,8 +54,8 @@ final class CharacterDetailVM: BaseViewModel {
         (selectedCharacter?.thumbnail.path ?? "") + "." + (selectedCharacter?.thumbnail.thumbnailExtension ?? "")
     }
     
-    var description: String {
-        selectedCharacter?.description ?? ""
+    var description: String? {
+        selectedCharacter?.description
     }
     
     var characterComics: [Comics] {
